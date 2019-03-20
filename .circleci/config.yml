@@ -1,6 +1,5 @@
 # TODO: Use Git Clone to bring shell scripts locally. Yes
 # CHECK IF TAG IS EMPTY. Only deploy if master
-#
 version: 2
 jobs:
   build:
