@@ -1,5 +1,11 @@
 version: 2
 jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "A first hello"
   publish-github-release:
     docker:
       - image: cibuilds/github:0.10
