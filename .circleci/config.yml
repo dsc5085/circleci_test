@@ -9,7 +9,9 @@ jobs:
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
           root: my_workspace
+          # Must be relative path from root
           paths:
             - echo-output
   two:
@@ -19,6 +21,7 @@ jobs:
       - checkout
       - run: echo "A more familiar hi"
       - attach_workspace:
+          # Must be absolute path or relative path from working_directory
           at: my_workspace
 
       - run: |
@@ -32,6 +35,6 @@ workflows:
   one_and_two:
     jobs:
       - one
-      - two
-        requires:
-          - one
+      - two:
+          requires:
+            - one
