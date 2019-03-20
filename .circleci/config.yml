@@ -41,4 +41,6 @@ workflows:
               ignore: /.*/
             tags:
               only: /^\d+\.\d+\.\d+$/
-#
+      - deploy:
+          requires:
+            - build
