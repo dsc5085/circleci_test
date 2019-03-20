@@ -15,7 +15,16 @@ jobs:
       - run:
           name: "Publishes Release on GitHub"
           command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete "${CIRCLE_TAG}" "./artifacts/"
+            ghr -t 46afc935c6aa7d8f32425a1aab97c7f4f323bf394 -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts/
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/circle-tmp-folder
+    steps:
+      - run:
+          name: Deploy
+          command: 'aws s3 sync ./artifacts/ s3://davidchen'
+
 workflows:
   version: 2
   main:
@@ -32,3 +41,4 @@ workflows:
               ignore: /.*/
             tags:
               only: /^\d+\.\d+\.\d+$/
+#
