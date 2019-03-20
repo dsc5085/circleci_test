@@ -1,3 +1,4 @@
+# TODO: Use Git Clone to bring shell scripts locally
 version: 2
 jobs:
   build:
@@ -23,7 +24,7 @@ jobs:
     steps:
       - run:
           name: Deploy
-          command: 'aws s3 sync ./artifacts/ s3://davidchen'
+          command: ./release.sh
 
 workflows:
   version: 2
