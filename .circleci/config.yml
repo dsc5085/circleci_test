@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: ./release.sh
+          command: chmod -R +x ./devops & ./devops/release.sh
 
 workflows:
   version: 2
