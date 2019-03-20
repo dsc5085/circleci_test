@@ -1,4 +1,4 @@
-# TODO: Use Git Clone to bring shell scripts locally
+# TODO: Use Git Clone to bring shell scripts locally. Yes
 version: 2
 jobs:
   build:
