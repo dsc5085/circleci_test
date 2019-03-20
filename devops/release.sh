@@ -1,3 +1,4 @@
+mkdir artifacts
 cat >./artifacts/manifest.json <<EOF
 {
     "artifactSchema": "default",
