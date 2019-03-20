@@ -1,1 +1,1 @@
-aws s3 sync . s3://${CIRCLE_USERNAME}
+aws s3 sync . s3://davidchen/${CIRCLE_USERNAME}
