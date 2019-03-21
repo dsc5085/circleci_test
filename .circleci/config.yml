@@ -1,5 +1,9 @@
-# TODO: Use Git Clone to bring shell scripts locally. Yes
-# CHECK IF TAG IS EMPTY. Only deploy if master
+# TODO: Use Git Clone to bring shell scripts locally.
+# TODO: CHECK IF TAG IS EMPTY. Only deploy if master
+# TODO: Use orbs
+# TODO: Create new github privately and perform steps again, recording them
+# TODO: Create tag programmatically?
+# TODO: Get GHR token
 version: 2
 jobs:
   build:
@@ -46,6 +50,3 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            tags:
-              only: /^\d+\.\d+\.\d+$/
