@@ -46,4 +46,7 @@ workflows:
       - deploy:
           requires:
             - build
+          filters:
+            tags:
+              only: /^\d+\.\d+\.\d+$/
 #
