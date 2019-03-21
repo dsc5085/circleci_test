@@ -4,6 +4,7 @@
 # TODO: Create new github privately and perform steps again, recording them
 # TODO: Create tag programmatically?
 # TODO: Get GHR token
+# TODO: Only deploy on master
 version: 2
 jobs:
   build:
