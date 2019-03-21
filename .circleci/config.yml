@@ -1,5 +1,5 @@
-# TODO: Use Git Clone to bring shell scripts locally.
-# TODO: CHECK IF TAG IS EMPTY. Only deploy if master
+# TODO: Use Git Clone to bring shell scripts locally. Pass it to next jobs
+# TODO: CHECK IF TAG IS EMPTY. Only deploy if master. Create tag in git if not exist. Tag commit too
 # TODO: Use orbs
 # TODO: Create new github privately and perform steps again, recording them
 # TODO: Create tag programmatically?
@@ -20,8 +20,7 @@ jobs:
           at: ./artifacts
       - run:
           name: "Publishes Release on GitHub"
-          command: |
-            ghr -t 46afc935c6aa7d8f32425a1aab97c7f4f323bf394 -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./artifacts/
+          command: ./devops/tag.sh
   deploy:
     machine:
       enabled: true
