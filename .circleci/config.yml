@@ -19,7 +19,7 @@ jobs:
       - checkout
       - run:
           name: "Publishes Release on GitHub"
-          command: ./devops/tag.sh
+          command: chmod -R +x ./devops && ./devops/tag.sh
   deploy:
     machine:
       enabled: true
