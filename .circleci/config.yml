@@ -21,7 +21,9 @@ jobs:
     steps:
       - checkout
       - run:
-          command: VERSION=`cat version_info`
+          command: |
+            VERSION=`cat version_info`
+            github-release release --security-token $GITHUB_TOKEN --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag ${VERSION} --name "Version ${VERSION}" --description "This release is version ${VERSION}." --target $CIRCLE_SHA1
       - github-release/create:
           tag: ${VERSION}
           title: Version ${VERSION}
@@ -35,7 +37,6 @@ jobs:
       - run:
           name: Deploy
           command: chmod -R +x ./devops && ./devops/release.sh
-
 workflows:
   version: 2
   main:
