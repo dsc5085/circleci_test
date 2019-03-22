@@ -17,16 +17,22 @@ jobs:
   publish-github-release:
     description: Create dummy file and publish a new release tagged `vX.Y.Z`.
     executor: github-release/default
-    working_directory: ~/circle-tmp-folder
     steps:
       - checkout
       - github-release/create:
-          tag: 3.0.0
-          title: Version 3.0.0
-          description: This release is version 3.0.0 .
+          tag: 1.9.0
+          title: Version 1.9.0
+          description: This release is version 1.9.0 .
       - run:
           name: Deploy
           command: chmod -R +x ./devops && ./devops/release.sh
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/circle-tmp-folder
+    steps:
+      - checkout
+
 workflows:
   version: 2
   main:
@@ -35,3 +41,6 @@ workflows:
       - publish-github-release:
           requires:
             - build
+      - deploy:
+          requires:
+            - publish-github-release
