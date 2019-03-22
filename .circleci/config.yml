@@ -46,5 +46,5 @@ workflows:
             - build
       - deploy:
           requires:
-            - build
+            - publish-github-release
 #
