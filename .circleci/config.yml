@@ -21,11 +21,11 @@ jobs:
     steps:
       - checkout
       - run:
-          command: version=`cat version_info`
+          command: VERSION=`cat version_info`
       - github-release/create:
-          tag: $version
-          title: Version 1.9.0
-          description: This release is version 1.9.0 .
+          tag: ${VERSION}
+          title: Version ${VERSION}
+          description: This release is version ${VERSION}.
   deploy:
     machine:
       enabled: true
