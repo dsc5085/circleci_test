@@ -18,24 +18,14 @@ jobs:
     description: Create dummy file and publish a new release tagged `vX.Y.Z`.
     executor: github-release/default
     steps:
-      - run:
-          command: |
-            mkdir artifacts
-            echo dummy > ./artifacts/file
+      - checkout
       - github-release/create:
           tag: 1.9.0
           title: Version 1.9.0
           description: This release is version 1.9.0 .
-  deploy:
-    machine:
-      enabled: true
-    working_directory: ~/circle-tmp-folder
-    steps:
-      - checkout
       - run:
           name: Deploy
           command: chmod -R +x ./devops && ./devops/release.sh
-
 workflows:
   version: 2
   main:
@@ -44,7 +34,3 @@ workflows:
       - publish-github-release:
           requires:
             - build
-      - deploy:
-          requires:
-            - publish-github-release
-#
