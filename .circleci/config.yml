@@ -16,18 +16,15 @@ jobs:
       - checkout
   publish-github-release:
     description: Create dummy file and publish a new release tagged `vX.Y.Z`.
-    executor: github-release/default
+    docker:
+      - image: cibuilds/github:0.10
     working_directory: ~/circle-tmp-folder
     steps:
       - checkout
       - run:
           command: |
             VERSION=`cat version_info`
-            github-release release --security-token $GITHUB_TOKEN --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag ${VERSION} --name "Version ${VERSION}" --description "This release is version ${VERSION}." --target $CIRCLE_SHA1
-      - github-release/create:
-          tag: ${VERSION}
-          title: Version ${VERSION}
-          description: This release is version ${VERSION}.
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
   deploy:
     machine:
       enabled: true
