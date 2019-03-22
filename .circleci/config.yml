@@ -30,8 +30,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Deploy
-        command: chmod -R +x ./devops && ./devops/release.s
+          name: Deploy
+          command: chmod -R +x ./devops && ./devops/release.sh
 
 workflows:
   version: 2
