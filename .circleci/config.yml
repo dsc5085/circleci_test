@@ -21,9 +21,9 @@ jobs:
     steps:
       - checkout
       - github-release/create:
-          tag: 2.9.0
-          title: Version 2.9.0
-          description: This release is version 2.9.0 .
+          tag: 3.0.0
+          title: Version 3.0.0
+          description: This release is version 3.0.0 .
       - run:
           name: Deploy
           command: chmod -R +x ./devops && ./devops/release.sh
