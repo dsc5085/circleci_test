@@ -4,9 +4,9 @@
 # TODO: Create new github privately and perform steps again, recording them
 # TODO: Get GHR token
 # TODO: Only deploy on master
-version: 2.0
+version: 2.1
 orbs:
-  fn-orb:
+  fn_orb:
     jobs:
       publish-github-release:
         description: Publish a new release tagged `vX.Y.Z`.
@@ -39,7 +39,7 @@ workflows:
   main:
     jobs:
       - build
-      - fn-orb/publish-github-release:
+      - fn_orb/publish-github-release:
           requires:
             - build
       - deploy:
