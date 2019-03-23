@@ -43,9 +43,9 @@ workflows:
   main:
     jobs:
       - fn_orb/publish-github-release
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - fn_orb/deploy:
           requires:
             - fn_orb/publish-github-release
