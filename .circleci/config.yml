@@ -20,11 +20,6 @@ orbs:
                 VERSION=`cat version_info`
                 ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
   deploy:
     machine:
       enabled: true
@@ -38,10 +33,7 @@ workflows:
   version: 2
   main:
     jobs:
-      - build
-      - fn_orb/publish-github-release:
-          requires:
-            - build
+      - fn_orb/publish-github-release
       - deploy:
           requires:
             - fn_orb/publish-github-release
