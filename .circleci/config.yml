@@ -42,7 +42,7 @@ workflows:
   version: 2
   main:
     jobs:
-      - fn_orb/publish-github-release
+      - fn_orb/publish-github-release:
           filters:
             branches:
               only: master
