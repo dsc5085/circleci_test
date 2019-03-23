@@ -2,29 +2,29 @@
 # TODO: CHECK IF TAG IS EMPTY. Only deploy if master. Create tag in git if not exist. Tag commit too
 # TODO: Use orbs
 # TODO: Create new github privately and perform steps again, recording them
-# TODO: Create tag programmatically?
 # TODO: Get GHR token
 # TODO: Only deploy on master
-version: 2.1
+version: 2.0
 orbs:
-  github-release: h-matsuo/github-release@0.1.1
+  fn-orb:
+    jobs:
+      publish-github-release:
+        description: Publish a new release tagged `vX.Y.Z`.
+        docker:
+          - image: cibuilds/github:0.10
+        working_directory: ~/circle-tmp-folder
+        steps:
+          - checkout
+          - run:
+              command: |
+                VERSION=`cat version_info`
+                ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
 jobs:
   build:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-  publish-github-release:
-    description: Create dummy file and publish a new release tagged `vX.Y.Z`.
-    docker:
-      - image: cibuilds/github:0.10
-    working_directory: ~/circle-tmp-folder
-    steps:
-      - checkout
-      - run:
-          command: |
-            VERSION=`cat version_info`
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
   deploy:
     machine:
       enabled: true
@@ -39,9 +39,9 @@ workflows:
   main:
     jobs:
       - build
-      - publish-github-release:
+      - fn-orb/publish-github-release:
           requires:
             - build
       - deploy:
           requires:
-            - publish-github-release
+            - fn-orb/publish-github-release
