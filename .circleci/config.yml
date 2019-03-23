@@ -44,4 +44,4 @@ workflows:
             - build
       - deploy:
           requires:
-            - fn-orb/publish-github-release
+            - fn_orb/publish-github-release
