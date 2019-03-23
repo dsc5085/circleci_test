@@ -1,4 +1,3 @@
-# TODO: Use Git Clone to bring shell scripts locally. Pass it to next jobs
 # TODO: CHECK IF TAG IS EMPTY. Only deploy if master. Create tag in git if not exist. Tag commit too
 # TODO: Use orbs
 # TODO: Create new github privately and perform steps again, recording them
@@ -19,7 +18,6 @@ orbs:
               command: |
                 VERSION=`cat version_info`
                 ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
-jobs:
   deploy:
     machine:
       enabled: true
@@ -28,12 +26,23 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: chmod -R +x ./devops && ./devops/release.sh
+          command: |
+            version=`cat version_info`
+            mkdir artifacts
+            cat >./artifacts/manifest.json <<EOF
+            {
+                "artifactSchema": "default",
+                "version": "$version",
+                "commitHash": "${CIRCLE_SHA1}"
+            }
+            EOF
+            bucket=davidchen
+            aws s3 sync ./artifacts s3://$bucket/packages/${CIRCLE_PROJECT_REPONAME}/artifacts/$version
 workflows:
   version: 2
   main:
     jobs:
       - fn_orb/publish-github-release
-      - deploy:
+      - fn_orb/deploy:
           requires:
             - fn_orb/publish-github-release
