@@ -12,9 +12,6 @@ orbs:
         docker:
           - image: cibuilds/github:0.10
         working_directory: ~/circle-tmp-folder
-        filters:
-          branches:
-            only: master
         steps:
           - checkout
           - run:
@@ -25,9 +22,6 @@ orbs:
         machine:
           enabled: true
         working_directory: ~/circle-tmp-folder
-        filters:
-          branches:
-            only: master
         steps:
           - checkout
           - run:
@@ -49,6 +43,9 @@ workflows:
   main:
     jobs:
       - fn_orb/publish-github-release
+        filters:
+          branches:
+            only: master
       - fn_orb/deploy:
           requires:
             - fn_orb/publish-github-release
