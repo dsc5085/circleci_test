@@ -29,7 +29,7 @@ orbs:
               command: |
                 version=`cat version_info`
                 mkdir artifacts
-                cat >./artifacts/manifest.json <<EOF
+                cat >./artifacts/manifest.json \<<EOF
                 {
                     "artifactSchema": "default",
                     "version": "$version",
