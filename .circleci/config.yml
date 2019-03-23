@@ -1,8 +1,5 @@
-# TODO: CHECK IF TAG IS EMPTY. Only deploy if master. Create tag in git if not exist. Tag commit too
 # TODO: Use orbs
 # TODO: Create new github privately and perform steps again, recording them
-# TODO: Get GHR token
-# TODO: Only deploy on master
 version: 2.1
 orbs:
   fn_orb:
