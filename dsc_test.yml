@@ -11,8 +11,11 @@ jobs:
       - run:
           command: |
             VERSION=`cat version_info`
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts
   deploy:
+    parameters:
+      bucket:
+        type: string
     machine:
       enabled: true
     working_directory: ~/circle-tmp-folder
@@ -31,4 +34,4 @@ jobs:
             }
             EOF
             bucket=davidchen
-            aws s3 sync ./artifacts s3://$bucket/packages/${CIRCLE_PROJECT_REPONAME}/artifacts/$version
+            aws s3 sync ./artifacts s3://<< parameters.bucket >>/packages/${CIRCLE_PROJECT_REPONAME}/artifacts/$version

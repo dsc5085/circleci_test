@@ -1,5 +1,8 @@
-# TODO: Use orbs
+# TODO: Make sure it meets ticket requirements
 # TODO: Create new github privately and perform steps again, recording them
+# TODO: combine publish and deploy, or pipe version to deploy?
+# TODO: Remove artifacts folder
+# TODO: custom artifact
 version: 2.1
 orbs:
   builder: dsc_test/builder@dev:1.0.0
@@ -12,5 +15,6 @@ workflows:
             branches:
               only: master
       - builder/deploy:
+          bucket: davidchen
           requires:
             - builder/publish-github-release
