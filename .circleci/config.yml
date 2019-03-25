@@ -1,7 +1,6 @@
 # TODO: Make sure it meets ticket requirements
 # TODO: Create new github privately and perform steps again, recording them
 # TODO: combine publish and deploy, or pipe version to deploy?
-# TODO: custom artifact
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
 version: 2.1
@@ -12,11 +11,11 @@ workflows:
   main:
     jobs:
       - builder/publish-github-release:
+          tag: 2.0.0
           filters:
             branches:
               only: master
       - builder/deploy:
           bucket: davidchen
-          artifact_schema: "haha"
           requires:
             - builder/publish-github-release

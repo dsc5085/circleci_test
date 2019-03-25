@@ -3,6 +3,9 @@ description: A builder orb.
 jobs:
   publish-github-release:
     description: Publish a new release tagged `vX.Y.Z`.
+    parameters:
+      tag:
+        type: string
     docker:
       - image: cibuilds/github:0.10
     working_directory: ~/circle-tmp-folder
@@ -10,9 +13,8 @@ jobs:
       - checkout
       - run:
           command: |
-            VERSION=`cat version_info`
             # TODO: PATH is required, so let's just arbitrarily set it to ./.circleci since that folder should exist
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./.circleci
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete << parameters.tag >> ./.circleci
   deploy:
     parameters:
       bucket:
@@ -28,7 +30,10 @@ jobs:
       - run:
           name: Deploy
           command: |
-            version=`cat version_info`
+            git clone ${CIRCLE_REPOSITORY_URL}
+            cd ${CIRCLE_PROJECT_REPONAME}
+            version=`git describe --exact-match --tags ${CIRCLE_SHA1}`
+            cd ..
             mkdir artifacts
             cat >./artifacts/manifest.json \<<EOF
             {
@@ -37,5 +42,4 @@ jobs:
                 "commitHash": "${CIRCLE_SHA1}"
             }
             EOF
-            bucket=davidchen
             aws s3 sync ./artifacts s3://<< parameters.bucket >>/packages/${CIRCLE_PROJECT_REPONAME}/artifacts/$version
