@@ -2,47 +2,15 @@
 # TODO: Create new github privately and perform steps again, recording them
 version: 2.1
 orbs:
-  fn_orb:
-    jobs:
-      publish-github-release:
-        description: Publish a new release tagged `vX.Y.Z`.
-        docker:
-          - image: cibuilds/github:0.10
-        working_directory: ~/circle-tmp-folder
-        steps:
-          - checkout
-          - run:
-              command: |
-                VERSION=`cat version_info`
-                ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} .
-      deploy:
-        machine:
-          enabled: true
-        working_directory: ~/circle-tmp-folder
-        steps:
-          - checkout
-          - run:
-              name: Deploy
-              command: |
-                version=`cat version_info`
-                mkdir artifacts
-                cat >./artifacts/manifest.json \<<EOF
-                {
-                    "artifactSchema": "default",
-                    "version": "$version",
-                    "commitHash": "${CIRCLE_SHA1}"
-                }
-                EOF
-                bucket=davidchen
-                aws s3 sync ./artifacts s3://$bucket/packages/${CIRCLE_PROJECT_REPONAME}/artifacts/$version
+  builder: dsc_test/builder@dev:first
 workflows:
   version: 2
   main:
     jobs:
-      - fn_orb/publish-github-release:
+      - builder/publish-github-release:
           filters:
             branches:
               only: master
-      - fn_orb/deploy:
+      - builder/deploy:
           requires:
             - fn_orb/publish-github-release
