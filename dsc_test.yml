@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           command: |
-            # TODO: PATH is required, so let's just arbitrarily set it to ./.circleci since that folder should exist
+            # TODO: PATH is required by ghr command, so let's just arbitrarily set it to ./.circleci since that folder should exist
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete << parameters.tag >> ./.circleci
   deploy:
     parameters:

@@ -1,8 +1,8 @@
 # TODO: Make sure it meets ticket requirements
 # TODO: Create new github privately and perform steps again, recording them
-# TODO: combine publish and deploy, or pipe version to deploy?
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
+# TODO: Test other branches
 version: 2.1
 orbs:
   builder: dsc_test/builder@dev:1.0.4
