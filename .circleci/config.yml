@@ -5,7 +5,7 @@
 # TODO: Documentation for orbs in files and orb page
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.3
+  builder: dsc_test/builder@dev:1.0.4
 workflows:
   version: 2
   main:
