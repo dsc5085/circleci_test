@@ -5,7 +5,7 @@
 # TODO: custom artifact
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.0
+  builder: dsc_test/builder@dev:1.0.1
 workflows:
   version: 2
   main:
