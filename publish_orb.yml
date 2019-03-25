@@ -7,7 +7,7 @@ workflows:
   btd:
     jobs:
       - orb-tools/publish:
-          orb-path: dsc_test.yml.yml
+          orb-path: dsc_test.yml
           orb-ref: circleci/hello-build@dev:${CIRCLE_BRANCH}
           publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
           validate: true
