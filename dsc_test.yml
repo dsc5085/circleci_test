@@ -11,12 +11,15 @@ jobs:
       - run:
           command: |
             VERSION=`cat version_info`
-            # TODO: PATH is required, just arbitrarily set to ./.circleci since the folder should exist
+            # TODO: PATH is required, so let's just arbitrarily set it to ./.circleci since that folder should exist
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./.circleci
   deploy:
     parameters:
       bucket:
         type: string
+      artifact_schema:
+        type: string
+        default: "default"
     machine:
       enabled: true
     working_directory: ~/circle-tmp-folder
@@ -29,7 +32,7 @@ jobs:
             mkdir artifacts
             cat >./artifacts/manifest.json \<<EOF
             {
-                "artifactSchema": "default",
+                "artifactSchema": "<< parameters.artifact_schema >>",
                 "version": "$version",
                 "commitHash": "${CIRCLE_SHA1}"
             }
