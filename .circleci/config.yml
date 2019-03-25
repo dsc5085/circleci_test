@@ -13,4 +13,4 @@ workflows:
               only: master
       - builder/deploy:
           requires:
-            - fn_orb/publish-github-release
+            - builder/publish-github-release
