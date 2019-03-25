@@ -2,7 +2,7 @@
 # TODO: Create new github privately and perform steps again, recording them
 version: 2.1
 orbs:
-  builder: dsc_tests/builder@dev:first
+  builder: dsc_test/builder@dev:1.0.0
 workflows:
   version: 2
   main:
