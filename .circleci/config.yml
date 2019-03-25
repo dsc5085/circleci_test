@@ -1,8 +1,8 @@
 # TODO: Make sure it meets ticket requirements
 # TODO: Create new github privately and perform steps again, recording them
 # TODO: combine publish and deploy, or pipe version to deploy?
-# TODO: Remove artifacts folder
 # TODO: custom artifact
+# TODO: DOcument on agora
 version: 2.1
 orbs:
   builder: dsc_test/builder@dev:1.0.1

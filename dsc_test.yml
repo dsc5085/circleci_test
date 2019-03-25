@@ -11,7 +11,8 @@ jobs:
       - run:
           command: |
             VERSION=`cat version_info`
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts
+            # TODO: PATH is required, just arbitrarily set to ./.circleci since the folder should exist
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./.circleci
   deploy:
     parameters:
       bucket:
