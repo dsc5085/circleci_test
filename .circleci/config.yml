@@ -5,7 +5,7 @@
 # TODO: DOcument on agora
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.1
+  builder: dsc_test/builder@dev:1.0.2
 workflows:
   version: 2
   main:
