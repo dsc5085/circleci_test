@@ -1,8 +1,7 @@
-# TODO: Make sure it meets ticket requirements
-# TODO: Create new github privately and perform steps again, recording them
+`# TODO: Create new github privately and perform steps again, recording them
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
-# TODO: Test other branches
+# TODO: Test other branches. dev could require publishing and s3 deploy
 # TODO: Check for GITHUB_TOKEN
 version: 2.1
 orbs:
