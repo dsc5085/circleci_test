@@ -6,7 +6,7 @@
 # TODO: Check for GITHUB_TOKEN
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.5
+  builder: dsc_test/builder@dev:1.0.6
 workflows:
   version: 2
   main:
