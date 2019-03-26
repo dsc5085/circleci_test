@@ -3,15 +3,16 @@
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
 # TODO: Test other branches
+# TODO: Check for GITHUB_TOKEN
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.4
+  builder: dsc_test/builder@dev:1.0.5
 workflows:
   version: 2
   main:
     jobs:
       - builder/publish-github-release:
-          tag: 2.0.0
+          tag: 6.7.0
           filters:
             branches:
               only: master
