@@ -1,11 +1,10 @@
-`# TODO: Create new github privately and perform steps again, recording them
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
-# TODO: Test other branches. dev could require publishing and s3 deploy
-# TODO: Check for GITHUB_TOKEN
+# TODO: Check for GITHUB_TOKEN (and other checks)
+# TODO: Checkin orb to FN repo
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.6
+  builder: dsc_test/builder@dev:1.0.7
 workflows:
   version: 2
   main:
