@@ -1,16 +1,14 @@
 # TODO: Document on Agora
 # TODO: Documentation for orbs in files and orb page
-# TODO: Check for GITHUB_TOKEN (and other checks)
 # TODO: Checkin orb to FN repo
 version: 2.1
 orbs:
-  builder: dsc_test/builder@dev:1.0.8
+  builder: dsc_test/builder@dev:1.0.9
 workflows:
   version: 2
   main:
     jobs:
       - builder/publish-github-release:
-          tag: 6.7.0
           filters:
             branches:
               only: master
